@@ -1,5 +1,7 @@
 import { useState } from "react"
 import { Spiner } from "./Spiner"
+import styled from "@emotion/styled"
+import { CARD_HEIGHT, CARD_WIDTH } from "../constants/constants"
 
 interface KeyboardCardProps {
     title: string,
@@ -16,7 +18,7 @@ export const KeyboardCard = ({
 }: KeyboardCardProps) => {
     const [isLoaded, setIsLoaded] = useState(false)
     return (
-        <div className=" w-[300px] h-[300px] outline-1 outline-amber-400">
+        <CardContainer>
             {isLoaded ? <Spiner /> : null}
             <img className="h-[200px] outline-solid4"
                 src={imageUrl}
@@ -29,6 +31,12 @@ export const KeyboardCard = ({
                 <p>{discription}</p>
                 <a href={linkUrl}>link</a>
             </div>
-        </div>
+        </CardContainer>
     )
 }
+
+const CardContainer = styled.div`
+    width : ${CARD_WIDTH};
+    height: ${CARD_HEIGHT};
+    border: 2px solid #FF8C00;
+`
