@@ -4,7 +4,6 @@ function App() {
 
   const { data } = useKeyboards()
 
-  console.log(data)
   // 데이터를 불러오는 훅
   // env에 비밀 정보를 넣어두고, github에는 secret에 정보를 넣어둔다.
   return (
@@ -13,7 +12,6 @@ function App() {
       {/* 본문 */}
       <div className='grid grid-cols-3 gap-5 w-fit'>
         {data?.map((keyboard) => {
-          console.log(keyboard.image_url)
           return ( 
           <KeyboardCard
           key={keyboard.id}
