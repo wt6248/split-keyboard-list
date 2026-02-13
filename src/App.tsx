@@ -1,4 +1,5 @@
 import { KeyboardCard } from './components/KeyboardCard'
+import { Sidebar } from './components/Sidebar'
 import { useKeyboards } from './hooks/useKeyboard'
 function App() {
 
@@ -9,8 +10,9 @@ function App() {
   return (
     <>
       {/* 사이드바 필터 */}
+      <Sidebar/>
       {/* 본문 */}
-      <div className='grid grid-cols-3 gap-5 w-fit'>
+      <div className='grid grid-cols-3 gap-5 w-fit min-w-fit'>
         {data?.map((keyboard) => {
           return ( 
           <KeyboardCard

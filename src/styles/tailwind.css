@@ -1,0 +1,40 @@
+/* styles/tailwind.css */
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-background: #0E0E10;
+  --color-card: #18181B;
+  --color-border: #2E2E33;
+  --color-accent: #FF6B00;
+  --color-tag: #252528;
+  --color-text-main: #F0F0F0;
+  --color-text-sub: #8E8E93;
+  --color-text-blur: #5A5A5E;
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+
+  /* Layout */
+  --spacing-card-width: 300px;
+  --spacing-card-gap: 20px;
+  --spacing-sidebar: 280px;
+  --radius-card: 12px;
+
+  /* Fonts */
+  --font-display: 'Space Mono', monospace;
+  --font-body: 'DM Sans', sans-serif;
+
+  /* Font Sizes */
+  --text-display: 32px;
+  --text-heading-lg: 24px;
+  --text-heading-sm: 15px;
+  --text-body: 15px;
+  --text-body-sm: 13px;
+  --text-label: 11px;
+}
