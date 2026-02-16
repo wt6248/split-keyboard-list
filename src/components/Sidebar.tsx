@@ -1,6 +1,7 @@
 import styled from "@emotion/styled"
 import { AnimatePresence, motion } from "motion/react"
 import { useState } from "react"
+import { theme } from "@/tokens/theme"
 
 export const Sidebar = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
@@ -9,9 +10,9 @@ export const Sidebar = () => {
         <>
             <ToggleButton 
                 initial={{x: 0}}
-                animate ={{x: '280px'}}
+                animate ={{x: isSidebarOpen? '280px': 0}}
                 exit={{x: 0}}
-            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                onClick={() => setIsSidebarOpen(!isSidebarOpen)}
             >
                 {isSidebarOpen ? '✕' : '☰'}
 
@@ -44,19 +45,20 @@ export const Sidebar = () => {
 }
 
 const ToggleButton = styled(motion.button)`
-    background : white;
-    border-radius: 100%;
+    background : ${theme.colors.card};
+    border-radius: 0 50% 50% 0;
     position: fixed;
     top : 20px;
-    left : 20px;
     width: 50px;
     height: 50px;
-    z-index: 20;
+    z-index: 50;
+    color: ${theme.colors.text.main};
+    border: 1px solid ${theme.colors.border};
 `
 const Overlay = styled(motion.div)`
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.4);
+    background: rgba(0, 0, 0, 0.5);
     z-index: 5;
 `
 const SidebarContainer = styled(motion.aside)`
@@ -65,6 +67,7 @@ const SidebarContainer = styled(motion.aside)`
     left: 0;
     width: 280px;
     height: 100vh;
-    background: white;
-    z-index: 50;
+    background: ${theme.colors.card};
+    z-index: 40;
+    color: ${theme.colors.text.main};
 `
