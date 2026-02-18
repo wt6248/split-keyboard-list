@@ -27,6 +27,7 @@ const HeaderContainer = styled.div`
     left: 0;
     width: 100%;
     background: ${theme.colors.card};
+    border: 1px solid ${theme.colors.border};
     padding: 16px 32px;
 
 `

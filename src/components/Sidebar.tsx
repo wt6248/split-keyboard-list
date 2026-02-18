@@ -48,7 +48,7 @@ const ToggleButton = styled(motion.button)`
     background : ${theme.colors.card};
     border-radius: 0 50% 50% 0;
     position: fixed;
-    top : 20px;
+    top : 80px;
     width: 50px;
     height: 50px;
     z-index: 50;

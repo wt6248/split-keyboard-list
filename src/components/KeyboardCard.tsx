@@ -77,4 +77,8 @@ const CardContainer = styled.div`
     border-radius: ${theme.layout.cardRound};
     overflow: hidden;
     cursor: pointer;
+
+    &:hover {
+        border-color: ${theme.colors.accent};
+    }
 `
