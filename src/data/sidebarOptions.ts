@@ -1,7 +1,7 @@
 
 export const filterCategories = [
   {
-    key: "matrix_row",
+    key: "matrix_rows",
     label: "Matrix Row",
     options: [
       { label: "6+", value: "6+" },
@@ -12,7 +12,7 @@ export const filterCategories = [
     ],
   },
   {
-    key: "matrix_column",
+    key: "matrix_cols",
     label: "Matrix Column",
     options: [
       { label: "7+", value: "7+" },
@@ -22,7 +22,7 @@ export const filterCategories = [
     ],
   },
   {
-    key: "type",
+    key: "layout",
     label: "키보드 타입",
     options: [
       { label: "로우스태거", value: "row-stagger" },
