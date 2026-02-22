@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { keyboardApi } from "../api/keyboard";
+import { keyboardApi, type GetPageParams } from "../api/keyboard";
 
-export function useKeyboards() {
-    return useQuery({
-        queryKey: ['keyboards'],
-        queryFn: keyboardApi.getAll
-    })
+export function useKeyboards(params?: GetPageParams) {
+  return useQuery({
+    queryKey: ["keyboards", params],
+    queryFn: () => keyboardApi.getPage(params),
+  });
 }

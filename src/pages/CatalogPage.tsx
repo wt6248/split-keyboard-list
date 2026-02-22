@@ -1,22 +1,23 @@
 import { KeyboardCard } from "@/components/KeyboardCard";
 import { Sidebar } from "@/components/Sidebar";
+import useFilterParams from "@/hooks/useFilterParams";
 import { useKeyboards } from "@/hooks/useKeyboard";
 import { theme } from "@/tokens/theme";
 import styled from "@emotion/styled";
 
 export const CatalogPage = () => {
-  const { data } = useKeyboards();
-
-  // 데이터를 불러오는 훅
-  // env에 비밀 정보를 넣어두고, github에는 secret에 정보를 넣어둔다.
+  const { activeFilters, set } = useFilterParams();
+  // console.log(activeFilters);
+  const { data } = useKeyboards({ filters: activeFilters });
+  
   return (
     <>
       {/* 사이드바 필터 */}
       <Sidebar />
       {/* 본문 */}
       <HomepageContainer>
-        <div className="grid place-items-center grid-cols-3 gap-5 min-w-fit">
-          {data?.map((keyboard) => {
+        <GridContainer>
+          {data?.keyboards.map((keyboard) => {
             return (
               <KeyboardCard
                 key={keyboard.id}
@@ -27,6 +28,19 @@ export const CatalogPage = () => {
               />
             );
           })}
+        </GridContainer>
+        {/* pagenation */}
+        <div className="flex justify-center gap-2 mt-8">
+          {Array.from({ length: data?.totalPages ?? 0 }, (_, i) => i + 1).map(
+            (pageNumber) => (
+              <PageButton
+                $active={pageNumber === (Number(activeFilters.page?.[0]) || 1)}
+                onClick={() => set("page", String(pageNumber))}
+              >
+                {pageNumber}
+              </PageButton>
+            ),
+          )}
         </div>
       </HomepageContainer>
     </>
@@ -35,7 +49,24 @@ export const CatalogPage = () => {
 
 const HomepageContainer = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   padding: 32px;
   background-color: ${theme.colors.background};
-`
+  overflow-x: auto;
+`;
+
+const GridContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 300px);
+  gap: 1.25rem;
+  width: fit-content;
+  `
+
+const PageButton = styled.div<{ $active: boolean }>`
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+  background-color: ${({ $active }) => ($active ? "#3b82f6" : "#e5e7eb")};
+  color: ${({ $active }) => ($active ? "white" : "inherit")};
+`;
