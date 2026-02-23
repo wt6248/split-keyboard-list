@@ -19,7 +19,11 @@ function useFilterParams() {
 
       if (current.includes(value)) {
         const updated = current.filter((v) => v !== value);
-        updated.length ? next.set(key, updated.join(",")) : next.delete(key);
+        if (updated.length) {
+          next.set(key, updated.join(","));
+        } else {
+          next.delete(key);
+        }
       } else {
         next.set(key, [...current, value].join(","));
       }
@@ -27,7 +31,8 @@ function useFilterParams() {
     });
   };
 //   const get = (key: string) => searchParams.get(key);
-  const setFilterParam = (key: string, value: string) => {
+  const setFilter = (key: string, value: string) => {
+    console.log(`set ${key} to ${value}`)
     setSearchParams((prev) => {
       const next = new URLSearchParams(prev);
       next.set(key, value);
@@ -35,7 +40,16 @@ function useFilterParams() {
     });
   };
 
-  return { activeFilters, toggle, set: setFilterParam };
+  const setSortFilter = (sortBy: string, sortOrder: string) => {
+  setSearchParams((prev) => {
+    const next = new URLSearchParams(prev);
+    next.set('sortBy', sortBy);
+    next.set('sortOrder', sortOrder);
+    return next;
+  });
+};
+
+  return { activeFilters, toggle, setFilter, setSortFilter}
 }
 
 export default useFilterParams;

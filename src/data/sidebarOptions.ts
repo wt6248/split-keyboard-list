@@ -1,4 +1,3 @@
-
 export const filterCategories = [
   {
     key: "matrix_rows",
@@ -31,6 +30,15 @@ export const filterCategories = [
       { label: "스프레이", value: "splay" },
       { label: "앨리스", value: "alice" },
       { label: "댁틸", value: "dactyl" },
+      { label: "기타", value: "other" },
+    ],
+  },
+  {
+    key: "pointing_device",
+    label: "커서 조작 여부",
+    options: [
+      { label: "트랙볼", value: "trackball" },
+      { label: "없음", value: "none"},
       { label: "기타", value: "other" },
     ],
   },

@@ -2,13 +2,12 @@ import styled from "@emotion/styled"
 import { AnimatePresence, motion } from "motion/react"
 import { useState } from "react"
 import { theme } from "@/tokens/theme"
-import { filterCategories } from "@/data/sidebarOptions"
+import { filterCategories, sortOptions } from "@/data/sidebarOptions"
 import useFilterParams from "@/hooks/useFilterParams"
 
 export const Sidebar = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-    const {activeFilters, toggle } = useFilterParams()
-    console.log(activeFilters)
+    const { activeFilters, toggle, setSortFilter } = useFilterParams()
     return (
         <>
             <ToggleButton
@@ -44,16 +43,35 @@ export const Sidebar = () => {
                                         <div className={category.key === "type" ? "flex flex-col" : "flex flex-row flex-wrap gap-2"}>
                                             {category.options.map((option) => (
                                                 <label key={option.value}>
-                                                    <StyledCheckbox 
-                                                    type="checkbox"
-                                                    checked={ activeFilters[category.key]?.includes(option.value) ?? false}
-                                                    onClick={() => toggle(category.key, option.value)}/>
+                                                    <StyledCheckbox
+                                                        type="checkbox"
+                                                        checked={activeFilters[category.key]?.includes(option.value) ?? false}
+                                                        onClick={() => toggle(category.key, option.value)} />
                                                     {option.label}
                                                 </label>
                                             ))}
                                         </div>
                                     </div>
                                 ))}
+                            <span>정렬</span>
+                                {sortOptions.map((sortLabel) => (
+                                    <label>
+                                        <input
+                                            type="radio"
+                                            name="sortOptions"
+                                            checked={
+                                                activeFilters["sortBy"]?.includes(sortLabel.value.sortBy) &&
+                                                activeFilters["sortOrder"]?.includes(sortLabel.value.sortOrder)}
+                                            onClick={() => {
+                                                setSortFilter(sortLabel.value.sortBy, sortLabel.value.sortOrder)
+                                            }}
+                                        />
+                                        {sortLabel.label}
+                                    </label>
+                                ))}
+                            </fieldset>
+                            <fieldset>
+                                
                             </fieldset>
                         </SidebarContainer>
                     </>

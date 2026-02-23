@@ -1,13 +1,13 @@
+import { PostgrestFilterBuilder } from "@supabase/postgrest-js";
 import { supabase } from "./supabase";
 
 export interface GetPageParams {
-//   page?: number;
-  perPage?: number;
-//   sortBy?: string;
-//   sortOrder?: "asc" | "desc";
   filters?: Record<string, string[]>;
 }
-function applyFilters(query: any, filters: Record<string, string[]>) {
+function applyFilters(
+  query: PostgrestFilterBuilder<any, any, any, any>,
+  filters: Record<string, string[]>
+) {
       console.log("filters:", filters);
 
   Object.entries(filters).forEach(([key, values]) => {
@@ -44,32 +44,22 @@ function applyFilters(query: any, filters: Record<string, string[]>) {
 }
 
 export const keyboardApi = {
-//   getAll: async () => {
-//     const { data } = await supabase.from("keyboards").select("*");
-//     return data?.map((kb) => ({
-//       ...kb,
-//       image_url: import.meta.env.VITE_SUPABASE_IMAGE_PATH + kb.image_path,
-//     }));
-//   },
+
   getPage: async ({
-    // page = 1,
-    perPage = 9,
-    // sortBy = "name",
-    // sortOrder = "desc",
+    
     filters = {},
   }: GetPageParams = {}) => {
-    // console.log("API called with params:", { page, perPage, sortBy, sortOrder, filters });
     const page = Number(filters.page?.[0]) || 1;
     const sortBy = filters.sortBy?.[0] || "name";
     const sortOrder = (filters.sortOrder?.[0] || "asc") as "asc" | "desc";
-
+    const perPage = 9;
     const from = (page - 1) * perPage;
     const to = from + perPage - 1;
 
     let query = supabase
       .from("keyboards")
       .select("*", { count: "exact" })
-      .order(sortBy, { ascending: sortOrder === "asc" })
+      .order(sortBy, { ascending: sortOrder === "asc", nullsFirst: false  })
       .range(from, to);
 
     // --- 필터 적용 ---
@@ -99,19 +89,5 @@ export const keyboardApi = {
 
     const { count } = await query;
     return Math.ceil((count ?? 0) / 9);
-  },
-
-  getById: async (id: string) => {
-    //tbd
-    return id;
-  },
-
-  create: async () => {
-    //tbd
-  },
-
-  getImageURL: (keyboardId: string) => {
-    console.log(import.meta.env.VITE_SUPABASE_IMAGE_PATH);
-    return import.meta.env.VITE_SUPABASE_IMAGE_PATH + keyboardId;
   },
 };

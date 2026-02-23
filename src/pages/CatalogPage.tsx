@@ -6,7 +6,7 @@ import { theme } from "@/tokens/theme";
 import styled from "@emotion/styled";
 
 export const CatalogPage = () => {
-  const { activeFilters, set } = useFilterParams();
+  const { activeFilters, setFilter } = useFilterParams();
   // console.log(activeFilters);
   const { data } = useKeyboards({ filters: activeFilters });
   
@@ -35,7 +35,7 @@ export const CatalogPage = () => {
             (pageNumber) => (
               <PageButton
                 $active={pageNumber === (Number(activeFilters.page?.[0]) || 1)}
-                onClick={() => set("page", String(pageNumber))}
+                onClick={() => setFilter("page", String(pageNumber))}
               >
                 {pageNumber}
               </PageButton>
