@@ -31,7 +31,7 @@ export const KeyboardCard = ({
             <CardBody>
                 <CardName>{title}</CardName>
                 <CardDiscription>{discription}</CardDiscription>
-                <CardLink href={linkUrl}>link</CardLink>
+                <CardLink href={linkUrl} target="_blank" rel="noopener noreferrer">link</CardLink>
             </CardBody>
         </CardContainer>
     )
@@ -56,8 +56,8 @@ const CardImage = styled.div`
 `
 
 const CardLink = styled.a`
-    ${theme.style.bodySm}
-    color: ${theme.colors.accent}
+    ${theme.style.bodySm};
+    color: ${theme.colors.accent};
 `
 
 const CardDiscription = styled.p`
@@ -67,7 +67,7 @@ const CardDiscription = styled.p`
 `
 
 const CardBody = styled.div`
-    padding: ${theme.spacing.md}
+    padding: ${theme.spacing.md};
 `
 
 const CardContainer = styled.div`

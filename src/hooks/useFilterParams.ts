@@ -30,7 +30,7 @@ function useFilterParams() {
       return next;
     });
   };
-//   const get = (key: string) => searchParams.get(key);
+
   const setFilter = (key: string, value: string) => {
     console.log(`set ${key} to ${value}`)
     setSearchParams((prev) => {

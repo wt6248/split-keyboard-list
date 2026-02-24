@@ -24,7 +24,7 @@ export const CatalogPage = () => {
                 title={keyboard.name}
                 imageUrl={keyboard.image_url}
                 discription={keyboard.description}
-                linkUrl={keyboard.github_url}
+                linkUrl={keyboard.github_url ?? keyboard.website_url}
               />
             );
           })}
@@ -49,6 +49,7 @@ export const CatalogPage = () => {
 
 const HomepageContainer = styled.div`
   display: flex;
+  min-height: 100vh;
   flex-direction: column;
   justify-content: center;
   align-items: center;
