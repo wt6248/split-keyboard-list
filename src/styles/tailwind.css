@@ -1,6 +1,10 @@
 /* styles/tailwind.css */
 @import "tailwindcss";
 
+html, body {
+  background-color: #0E0E10;
+}
+
 @theme {
   /* Colors */
   --color-background: #0E0E10;
