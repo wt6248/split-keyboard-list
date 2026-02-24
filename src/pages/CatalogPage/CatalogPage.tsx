@@ -1,17 +1,24 @@
-import { KeyboardCard } from "@/pages/AboutPage/Components/KeyboardCard";
-import { Sidebar } from "@/pages/AboutPage/Components/Sidebar";
+import { KeyboardCard } from "@/pages/CatalogPage/Components/KeyboardCard";
+import { Sidebar } from "@/pages/CatalogPage/Components/Sidebar";
 import useFilterParams from "@/hooks/useFilterParams";
 import { useKeyboards } from "@/hooks/useKeyboard";
 import { theme } from "@/tokens/theme";
 import styled from "@emotion/styled";
+import { useState } from "react";
+import { DetailCardModal } from "./Components/DetailCardModal";
 
 export const CatalogPage = () => {
   const { activeFilters, setFilter } = useFilterParams();
   // console.log(activeFilters);
   const { data } = useKeyboards({ filters: activeFilters });
+  const [selectedKeyboard, setSelectedKeyboard] = useState(null)
   
   return (
     <>
+      <DetailCardModal
+      isOpen={!!selectedKeyboard}
+      onClose={()=> setSelectedKeyboard(null)}
+      keyboard={selectedKeyboard}/>
       {/* 사이드바 필터 */}
       <Sidebar />
       {/* 본문 */}
@@ -25,6 +32,7 @@ export const CatalogPage = () => {
                 imageUrl={keyboard.image_url}
                 discription={keyboard.description}
                 linkUrl={keyboard.github_url ?? keyboard.website_url}
+                onClick={()=>setSelectedKeyboard(keyboard)}
               />
             );
           })}

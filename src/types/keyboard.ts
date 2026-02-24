@@ -38,6 +38,7 @@ export type KeyboardRow = {
 
   // Storage 버킷 images 기준 object path (예: "images/crkbd.jpg")
   image_path: string | null;
+  image_url: string;
 
   layout: KeyboardLayout;
 

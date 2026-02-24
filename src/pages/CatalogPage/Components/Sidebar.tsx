@@ -71,9 +71,6 @@ export const Sidebar = () => {
                                     </label>
                                 ))}
                             </fieldset>
-                            <fieldset>
-                                
-                            </fieldset>
                         </SidebarContainer>
                     </>
                 )

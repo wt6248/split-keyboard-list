@@ -8,17 +8,19 @@ interface KeyboardCardProps {
     imageUrl: string,
     discription: string,
     linkUrl: string,
+    onClick:() =>void
 }
 
 export const KeyboardCard = ({
     title,
     imageUrl,
     discription,
-    linkUrl
+    linkUrl,
+    onClick
 }: KeyboardCardProps) => {
     const [isLoaded, setIsLoaded] = useState(false)
     return (
-        <CardContainer>
+        <CardContainer onClick={onClick}>
             {isLoaded ? <Spiner /> : null}
             <CardImage>
                 <img className="h-card-image-width outline-solid4"
