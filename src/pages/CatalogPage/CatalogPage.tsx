@@ -15,10 +15,10 @@ export const CatalogPage = () => {
   
   return (
     <>
-      <DetailCardModal
+      {selectedKeyboard && <DetailCardModal
       isOpen={!!selectedKeyboard}
       onClose={()=> setSelectedKeyboard(null)}
-      keyboard={selectedKeyboard}/>
+      keyboard={selectedKeyboard}/>}
       {/* 사이드바 필터 */}
       <Sidebar />
       {/* 본문 */}
