@@ -14,6 +14,7 @@ export const Sidebar = () => {
                 initial={{ x: 0 }}
                 animate={{ x: isSidebarOpen ? '280px' : 0 }}
                 exit={{ x: 0 }}
+                transition={{ type: 'tween', duration: 0.3 }}
                 onClick={() => setIsSidebarOpen(!isSidebarOpen)}
             >
                 {isSidebarOpen ? '✕' : '☰'}

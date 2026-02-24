@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Spiner } from "./Spiner"
 import styled from "@emotion/styled"
-import { theme } from "../tokens/theme"
+import { theme } from "../../../tokens/theme"
 
 interface KeyboardCardProps {
     title: string,
@@ -21,14 +21,14 @@ export const KeyboardCard = ({
         <CardContainer>
             {isLoaded ? <Spiner /> : null}
             <CardImage>
-                <img className="h-[200px] outline-solid4"
+                <img className="h-card-image-width outline-solid4"
                     src={imageUrl}
                     alt={title}
                     loading="lazy"
                     onLoad={() => setIsLoaded(true)}
                 />
             </CardImage>
-            <CardBody>
+            <CardBody className="h-car">
                 <CardName>{title}</CardName>
                 <CardDiscription>{discription}</CardDiscription>
                 <CardLink href={linkUrl} target="_blank" rel="noopener noreferrer">link</CardLink>
@@ -64,6 +64,7 @@ const CardDiscription = styled.p`
     ${theme.style.bodySm};
     color: ${theme.colors.text.sub};
     margin-bottom: ${theme.spacing.md};
+    height: 2rem;
 `
 
 const CardBody = styled.div`
@@ -74,9 +75,9 @@ const CardContainer = styled.div`
     width: ${theme.layout.cardWidth};
     background: ${theme.colors.card};
     border: 1px solid ${theme.colors.border};
-    border-radius: ${theme.layout.cardRound};
+    border-radius: ${theme.layout.cardRound}; 
     overflow: hidden;
-    cursor: pointer;
+    /* cursor: pointer; */
 
     &:hover {
         border-color: ${theme.colors.accent};

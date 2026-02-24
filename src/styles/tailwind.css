@@ -22,6 +22,7 @@
 
   /* Layout */
   --spacing-card-width: 300px;
+  --spacing-card-image-width: 200px;
   --spacing-card-gap: 20px;
   --spacing-sidebar: 280px;
   --radius-card: 12px;

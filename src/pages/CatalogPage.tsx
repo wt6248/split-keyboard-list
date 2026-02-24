@@ -1,5 +1,5 @@
-import { KeyboardCard } from "@/components/KeyboardCard";
-import { Sidebar } from "@/components/Sidebar";
+import { KeyboardCard } from "@/pages/AboutPage/Components/KeyboardCard";
+import { Sidebar } from "@/pages/AboutPage/Components/Sidebar";
 import useFilterParams from "@/hooks/useFilterParams";
 import { useKeyboards } from "@/hooks/useKeyboard";
 import { theme } from "@/tokens/theme";

@@ -15,6 +15,7 @@ function useFilterParams() {
   const toggle = (key: string, value: string) => {
     setSearchParams((prev) => {
       const next = new URLSearchParams(prev);
+      console.log(next.get(key))
       const current = next.get(key)?.split(",").filter(Boolean) ?? [];
 
       if (current.includes(value)) {
@@ -27,6 +28,7 @@ function useFilterParams() {
       } else {
         next.set(key, [...current, value].join(","));
       }
+      next.set('page', "1")
       return next;
     });
   };
