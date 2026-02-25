@@ -76,6 +76,7 @@ const GridContainer = styled.div`
 const PageButton = styled.div<{ $active: boolean }>`
   padding: 0.25rem 0.75rem;
   border-radius: 0.25rem;
-  background-color: ${({ $active }) => ($active ? "#3b82f6" : "#e5e7eb")};
-  color: ${({ $active }) => ($active ? "white" : "inherit")};
+  border: 1px solid ${theme.colors.border};
+  background-color: ${({ $active }) => ($active ? theme.colors.accent : theme.colors.card)};
+  color: ${theme.colors.text.main};
 `;

@@ -92,6 +92,7 @@ const ToggleButton = styled(motion.button)`
     z-index: 50;
     color: ${theme.colors.text.main};
     border: 1px solid ${theme.colors.border};
+    border-left: 0px;
 `
 const Overlay = styled(motion.div)`
     position: fixed;

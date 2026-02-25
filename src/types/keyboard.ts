@@ -54,3 +54,16 @@ export type KeyboardRow = {
   created_at: string;
   updated_at: string;
 };
+
+export const detailInfoKeys = [
+  'name',
+  'release_ym',
+  'designer',
+  'github_stars',
+  'layout',
+  'matrix_cols',
+  'matrix_rows',
+  'pointing_device',
+  'encoder',
+  'connectivity',
+] as const

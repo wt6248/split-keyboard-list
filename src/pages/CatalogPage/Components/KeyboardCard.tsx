@@ -2,13 +2,14 @@ import { useState } from "react"
 import { Spiner } from "./Spiner"
 import styled from "@emotion/styled"
 import { theme } from "../../../tokens/theme"
+import { detailInfoKeys } from "@/types/keyboard"
 
 interface KeyboardCardProps {
     title: string,
     imageUrl: string,
     discription: string,
     linkUrl: string,
-    onClick:() =>void
+    onClick: () => void
 }
 
 export const KeyboardCard = ({
@@ -79,7 +80,7 @@ const CardContainer = styled.div`
     border: 1px solid ${theme.colors.border};
     border-radius: ${theme.layout.cardRound}; 
     overflow: hidden;
-    /* cursor: pointer; */
+    cursor: pointer;
 
     &:hover {
         border-color: ${theme.colors.accent};
