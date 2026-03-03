@@ -38,6 +38,7 @@ export const filterCategories = [
     label: "커서 조작 여부",
     options: [
       { label: "트랙볼", value: "trackball" },
+      { label: "트랙포인트", value: "trackpoint" },
       { label: "없음", value: "none"},
       { label: "기타", value: "other" },
     ],

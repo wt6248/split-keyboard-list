@@ -1,17 +1,17 @@
-import { KeyboardCard } from "@/pages/CatalogPage/Components/KeyboardCard";
-import { Sidebar } from "@/pages/CatalogPage/Components/Sidebar";
+import { KeyboardCard } from "@/pages/catalog/Components/KeyboardCard";
+import { Sidebar } from "@/pages/catalog/Components/Sidebar";
 import useFilterParams from "@/hooks/useFilterParams";
 import { useKeyboards } from "@/hooks/useKeyboard";
 import { theme } from "@/tokens/theme";
 import styled from "@emotion/styled";
 import { useState } from "react";
 import { DetailCardModal } from "./Components/DetailCardModal";
+import { type KeyboardRow } from "@/types/keyboard";
 
 export const CatalogPage = () => {
   const { activeFilters, setFilter } = useFilterParams();
-  // console.log(activeFilters);
   const { data } = useKeyboards({ filters: activeFilters });
-  const [selectedKeyboard, setSelectedKeyboard] = useState(null)
+  const [selectedKeyboard, setSelectedKeyboard] = useState<KeyboardRow | null>(null)
   
   return (
     <>
@@ -24,7 +24,7 @@ export const CatalogPage = () => {
       {/* 본문 */}
       <HomepageContainer>
         <GridContainer>
-          {data?.keyboards.map((keyboard) => {
+          {data?.keyboards.map((keyboard : KeyboardRow) => {
             return (
               <KeyboardCard
                 key={keyboard.id}
@@ -79,4 +79,5 @@ const PageButton = styled.div<{ $active: boolean }>`
   border: 1px solid ${theme.colors.border};
   background-color: ${({ $active }) => ($active ? theme.colors.accent : theme.colors.card)};
   color: ${theme.colors.text.main};
+  cursor: pointer;
 `;

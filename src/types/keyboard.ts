@@ -22,7 +22,8 @@ export type PointingDevice =
   | 'unknown';
 
 export type EncoderSupport = 'none' | 'supported' | 'unknown';
-export type KeyboardRow = {
+
+export type RawKeyboardEntity = {
   id: string;
   name: string;
 
@@ -38,7 +39,6 @@ export type KeyboardRow = {
 
   // Storage 버킷 images 기준 object path (예: "images/crkbd.jpg")
   image_path: string | null;
-  image_url: string;
 
   layout: KeyboardLayout;
 
@@ -54,6 +54,10 @@ export type KeyboardRow = {
   created_at: string;
   updated_at: string;
 };
+
+export type KeyboardRow = RawKeyboardEntity & {
+  image_url: string | null
+}
 
 export const detailInfoKeys = [
   'name',

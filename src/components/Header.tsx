@@ -13,6 +13,7 @@ export const Header = () => {
             <LinkGroup>
                 <Link className="text-text-main" to="/">카탈로그</Link>
                 <Link className="text-text-main" to="/about">소개</Link>
+                <Link className="text-text-main" to="/table">표</Link>
                 <a href="https://github.com/wt6248/split-keyboard-list" target="_blank" rel="noopener noreferrer">Github</a>
             </LinkGroup>
         </HeaderContainer>
@@ -34,9 +35,6 @@ const HeaderContainer = styled.div`
 const Title = styled.div`
 display: flex;
 align-items: center;
-.Link {
-    ...${theme.style.bodySm};
-}
 `
 
 const LinkGroup = styled.div`
@@ -44,7 +42,7 @@ display: flex;
 align-items: center;
 gap: ${theme.spacing.lg};
 a {
-    ...${theme.style.bodySm};
+    ${theme.style.bodySm};
     color: ${theme.colors.text.sub};
 }
 `

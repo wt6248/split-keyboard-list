@@ -15,7 +15,6 @@ function useFilterParams() {
   const toggle = (key: string, value: string) => {
     setSearchParams((prev) => {
       const next = new URLSearchParams(prev);
-      console.log(next.get(key))
       const current = next.get(key)?.split(",").filter(Boolean) ?? [];
 
       if (current.includes(value)) {
@@ -34,10 +33,10 @@ function useFilterParams() {
   };
 
   const setFilter = (key: string, value: string) => {
-    console.log(`set ${key} to ${value}`)
     setSearchParams((prev) => {
       const next = new URLSearchParams(prev);
       next.set(key, value);
+      
       return next;
     });
   };
@@ -47,6 +46,7 @@ function useFilterParams() {
     const next = new URLSearchParams(prev);
     next.set('sortBy', sortBy);
     next.set('sortOrder', sortOrder);
+    next.set('page', "1")
     return next;
   });
 };

@@ -1,7 +1,7 @@
 import { theme } from "@/tokens/theme"
 import { detailInfoKeys, type KeyboardRow } from "@/types/keyboard"
 import styled from "@emotion/styled"
-import { useEffect, useRef, type ReactNode } from "react"
+import { useEffect, useRef } from "react"
 
 interface detailCardModalParams {
     isOpen: boolean
@@ -24,6 +24,15 @@ export const DetailCardModal = ({ isOpen, onClose, keyboard }: detailCardModalPa
         }
     }, [isOpen])
 
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden'
+        }
+        return () => {
+            document.body.style.overflow = ''
+        }
+    }, [isOpen])
+
     return (
         <DetailCardDialog
             ref={dialogRef}
@@ -43,24 +52,24 @@ const DetailCard = ({ keyboard }: detailCardParams) => {
     return (<div className="h-[700px] w-[630px] ">
         {/* // 키보드 이미지가 div 상단 절반을 차지함. */}
         <DetailCardImage
-            src={keyboard?.image_url}
+            src={keyboard?.image_url ?? undefined}
         />
         <div className="flex flex-col p-[32px] h-[50%] bg-card">
             <p className=" text-heading-lg text-text-main pb-[8px]">{keyboard?.name}</p>
             <p className=" text-body-sm text-text-sub pb-[24px]">{keyboard?.description}</p>
             <div className="grid grid-cols-2 gap-ms">
-                    {keyboard && detailInfoKeys.map((key) => (
-                        <div key={key}>
-                            <span className="text-label text-text-sub pr-1.5">{key}</span>
-                            <span className="text-sm text-text-main">{keyboard?.[key] ?? 0}</span>
-                        </div>
-                    ))}
-                </div>
+                {keyboard && detailInfoKeys.map((key) => (
+                    <div key={key}>
+                        <span className="text-label text-text-sub pr-1.5">{key}</span>
+                        <span className="text-sm text-text-main">{keyboard?.[key] ?? 0}</span>
+                    </div>
+                ))}
+            </div>
             <div className="mt-auto flex  justify-start">
-            <DetailLinkButton
-            href={keyboard?.github_url ?? keyboard?.website_url ?? undefined} target="_blank" rel="noopener noreferrer"
-             >사이트 방문</DetailLinkButton>
-            {/* <button >닫기</button> */}
+                <DetailLinkButton
+                    href={keyboard?.github_url ?? keyboard?.website_url ?? undefined} target="_blank" rel="noopener noreferrer"
+                >사이트 방문</DetailLinkButton>
+                {/* <button >닫기</button> */}
 
             </div>
         </div>
@@ -84,11 +93,15 @@ const DetailLinkButton = styled.a`
     background: ${theme.colors.accent};
     padding: 10px 24px;
     border-radius: 8px;
-
-    
 `
 const DetailCardDialog = styled.dialog`
     margin: auto;
   position: fixed;
+  background: rgba(0, 0, 0,1);
+  backdrop-filter: blur(4px);
   inset: 0;
+  &::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+  }
 `

@@ -1,5 +1,6 @@
 import { PostgrestFilterBuilder } from "@supabase/postgrest-js";
 import { supabase } from "./supabase";
+import type { RawKeyboardEntity } from "@/types/keyboard";
 
 export interface GetPageParams {
   filters?: Record<string, string[]>;
@@ -8,7 +9,6 @@ function applyFilters(
   query: PostgrestFilterBuilder<any, any, any, any>,
   filters: Record<string, string[]>
 ) {
-      console.log("filters:", filters);
 
   Object.entries(filters).forEach(([key, values]) => {
     if (
@@ -33,7 +33,6 @@ function applyFilters(
       if (lte !== null) conditions.push(`${key}.lte.${lte}`);
       exact.forEach((n) => conditions.push(`${key}.eq.${n}`));
 
-    console.log("or conditions:", conditions.join(","));
       query = query.or(conditions.join(","));
     } else {
       query = query.in(key, values);
@@ -70,7 +69,7 @@ export const keyboardApi = {
 
     return {
       keyboards:
-        data?.map((keyboard) => ({
+        data?.map((keyboard: RawKeyboardEntity) => ({
           ...keyboard,
           image_url:
             import.meta.env.VITE_SUPABASE_IMAGE_PATH + keyboard.image_path,

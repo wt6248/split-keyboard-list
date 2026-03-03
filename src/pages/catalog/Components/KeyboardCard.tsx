@@ -2,13 +2,12 @@ import { useState } from "react"
 import { Spiner } from "./Spiner"
 import styled from "@emotion/styled"
 import { theme } from "../../../tokens/theme"
-import { detailInfoKeys } from "@/types/keyboard"
 
 interface KeyboardCardProps {
     title: string,
-    imageUrl: string,
-    discription: string,
-    linkUrl: string,
+    imageUrl: string | null,
+    discription: string | null ,
+    linkUrl: string | null ,
     onClick: () => void
 }
 
@@ -25,7 +24,7 @@ export const KeyboardCard = ({
             {isLoaded ? <Spiner /> : null}
             <CardImage>
                 <img className="h-card-image-width outline-solid4"
-                    src={imageUrl}
+                    src={imageUrl ?? undefined}
                     alt={title}
                     loading="lazy"
                     onLoad={() => setIsLoaded(true)}
@@ -34,7 +33,7 @@ export const KeyboardCard = ({
             <CardBody className="h-car">
                 <CardName>{title}</CardName>
                 <CardDiscription>{discription}</CardDiscription>
-                <CardLink href={linkUrl} target="_blank" rel="noopener noreferrer">link</CardLink>
+                <CardLink href={linkUrl ?? undefined} target="_blank" rel="noopener noreferrer">link</CardLink>
             </CardBody>
         </CardContainer>
     )

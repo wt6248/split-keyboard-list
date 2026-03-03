@@ -39,11 +39,11 @@ export const Sidebar = () => {
                                 className=" flex flex-col gap-5 p-[32px]"
                             >
                                 {filterCategories.map((category) => (
-                                    <div key={category.key}>
-                                        <legend>{category.label}</legend>
-                                        <div className={category.key === "type" ? "flex flex-col" : "flex flex-row flex-wrap gap-2"}>
+                                    <div className="pb-md" key={category.key}>
+                                        <legend className="pb-sm">{category.label}</legend>
+                                        <div className={category.key === "type" ? "flex flex-col" : "flex flex-row flex-wrap gap-sm"}>
                                             {category.options.map((option) => (
-                                                <label key={option.value}>
+                                                <label key={option.value} className="flex items-center gap-xs text-body-sm">
                                                     <StyledCheckbox
                                                         type="checkbox"
                                                         checked={activeFilters[category.key]?.includes(option.value) ?? false}
@@ -54,9 +54,10 @@ export const Sidebar = () => {
                                         </div>
                                     </div>
                                 ))}
+                            <div className="flex flex-col gap-sm">
                             <span>정렬</span>
                                 {sortOptions.map((sortLabel) => (
-                                    <label>
+                                    <label className="text-body-sm flex items-center gap-sm">
                                         <input
                                             type="radio"
                                             name="sortOptions"
@@ -70,6 +71,7 @@ export const Sidebar = () => {
                                         {sortLabel.label}
                                     </label>
                                 ))}
+                                </div>
                             </fieldset>
                         </SidebarContainer>
                     </>
