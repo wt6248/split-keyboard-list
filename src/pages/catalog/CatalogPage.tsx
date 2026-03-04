@@ -7,6 +7,7 @@ import styled from "@emotion/styled";
 import { useState } from "react";
 import { DetailCardModal } from "./Components/DetailCardModal";
 import { type KeyboardRow } from "@/types/keyboard";
+import { PageButton } from "@/components/PageButton";
 
 export const CatalogPage = () => {
   const { activeFilters, setFilter } = useFilterParams();
@@ -38,18 +39,19 @@ export const CatalogPage = () => {
           })}
         </GridContainer>
         {/* pagenation */}
-        <div className="flex justify-center gap-2 mt-8">
+        <PageButton totalPage={data?.totalPages ?? 0}/>
+        {/* <div className="flex justify-center gap-2 mt-8">
           {Array.from({ length: data?.totalPages ?? 0 }, (_, i) => i + 1).map(
             (pageNumber) => (
-              <PageButton
+              <Temp
                 $active={pageNumber === (Number(activeFilters.page?.[0]) || 1)}
                 onClick={() => setFilter("page", String(pageNumber))}
               >
                 {pageNumber}
-              </PageButton>
+              </Temp>
             ),
           )}
-        </div>
+        </div> */}
       </HomepageContainer>
     </>
   );
@@ -73,11 +75,11 @@ const GridContainer = styled.div`
   width: fit-content;
   `
 
-const PageButton = styled.div<{ $active: boolean }>`
-  padding: 0.25rem 0.75rem;
-  border-radius: 0.25rem;
-  border: 1px solid ${theme.colors.border};
-  background-color: ${({ $active }) => ($active ? theme.colors.accent : theme.colors.card)};
-  color: ${theme.colors.text.main};
-  cursor: pointer;
-`;
+// const Temp = styled.div<{ $active: boolean }>`
+//   padding: 0.25rem 0.75rem;
+//   border-radius: 0.25rem;
+//   border: 1px solid ${theme.colors.border};
+//   background-color: ${({ $active }) => ($active ? theme.colors.accent : theme.colors.card)};
+//   color: ${theme.colors.text.main};
+//   cursor: pointer;
+// `;

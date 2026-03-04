@@ -31,6 +31,14 @@ export const theme = {
     display: 'var(--font-display)',
     body: 'var(--font-body)',
   },
+  fontSize: {
+    display: 'var(--text-display)',
+    heading: 'var(--text-heading-lg)',
+    headingSM: 'var(--text-heading-sm)',
+    body: 'var(--text-body)',
+    bodySM: 'var(--text-body-sm)',
+    label: 'var(--text-label)',
+  },
   style: {
     display: {
       fontFamily: 'var(--font-display)',

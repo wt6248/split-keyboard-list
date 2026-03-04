@@ -1,87 +1,25 @@
+import { PageButton } from "@/components/PageButton";
+import { keyboardColumns } from "@/data/columnOptions";
+import useFilterParams from "@/hooks/useFilterParams";
 import { useKeyboards } from "@/hooks/useKeyboard"
-import { type KeyboardRow } from "@/types/keyboard";
-import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
+import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
+import TableRow from "./components/TableRow";
+import TableRowInput from "./components/TableRowInput";
 
-const TablePage = () => {
-    const keyboards = useKeyboards({}).data?.keyboards ?? []
-    const columnHelper = createColumnHelper<KeyboardRow>();
-
-    const keyboardColumns = [
-        columnHelper.accessor("image_url", {
-            header: "Image",
-            cell: (info) =>
-                info.getValue() ? (
-                    <img src={info.getValue() ?? undefined} width={50} />
-                ) : (
-                    "No Image"
-                ),
-        }),
-        columnHelper.accessor("name", {
-            header: "Name",
-            cell: (info) => info.getValue(),
-        }),
-        columnHelper.accessor("id", {
-            header: "ID",
-            cell: (info) => info.getValue(),
-        }),
-        columnHelper.accessor("release_ym", {
-            header: "Release YM",
-            cell: (info) => info.getValue(),
-        }),
-        columnHelper.accessor("designer", {
-            header: "Designer",
-            cell: (info) => info.getValue(),
-        }),
-        columnHelper.accessor("description", {
-            header: "Description",
-            cell: (info) => info.getValue(),
-        }),
-        columnHelper.accessor("github_url", {
-            header: "Github",
-            cell: (info) => info.getValue(),
-        }),
-        columnHelper.accessor("website_url", {
-            header: "Website",
-            cell: (info) => info.getValue(),
-        }),
-        columnHelper.accessor("github_stars", {
-            header: "Stars",
-            cell: (info) => info.getValue(),
-        }),
-        columnHelper.accessor("layout", {
-            header: "Layout",
-            cell: (info) => info.getValue(),
-        }),
-        columnHelper.accessor("pointing_device", {
-            header: "Pointing Devices",
-            cell: (info) => info.getValue(),
-        }),
-        columnHelper.accessor("encoder", {
-            header: "Encoder",
-            cell: (info) => info.getValue(),
-        }),
-        columnHelper.accessor("connectivity", {
-            header: "Connectivity",
-            cell: (info) => info.getValue(),
-        }),
-        columnHelper.accessor("matrix_cols", {
-            header: "cols",
-            cell: (info) => info.getValue(),
-        }),
-        columnHelper.accessor("matrix_rows", {
-            header: "rows",
-            cell: (info) => info.getValue(),
-        }),
-    ]
+const TablePage = () => {  
+    const { activeFilters, setFilter } = useFilterParams();
+  const { data } = useKeyboards({ filters: activeFilters });
+    // const keyboards = useKeyboards({}).data?.keyboards ?? []
+    
 
     const table = useReactTable({
-        data: keyboards,
+        data: data?.keyboards ?? [],
         columns: keyboardColumns,
         getCoreRowModel: getCoreRowModel(),
     })
 
-    return (
-        <table className="text-accent border-collapse">
+    return (<>
+        <table className="text-accent border-collapse mt-5 ">
              <thead>
             {table.getHeaderGroups().map(headerGroup => (
                 <tr key={headerGroup.id}>
@@ -95,16 +33,19 @@ const TablePage = () => {
         </thead>
         <tbody>
             {table.getRowModel().rows.map(row => (
-                <tr key={row.id}>
-                    {row.getVisibleCells().map(cell => (
-                        <td key={cell.id} className="border-white border">
-                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                        </td>
-                    ))}
-                </tr>
+                <TableRow keyboard={row.original}/>
+                
+            ))}
+           {table.getRowModel().rows.map(row => (
+                <TableRowInput
+                 keyboard={row.original}
+                 onSave={(data) => {console.log(data)}}/>
+                 
             ))}
         </tbody>
         </table>
+        <PageButton totalPage={data?.totalPages ?? 0}/>
+        </>
     )
 }
 
