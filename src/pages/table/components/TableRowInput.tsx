@@ -29,8 +29,7 @@ const TableRowInput = ({ keyboard, onSave }: StyledTableRowProps) => {
         <StyledTableRow>
             {columnOption.map((label) => (
                 <StyledCell>
-                <input
-                className=" bg-background border-border border-solid border-2"
+                <StyledInput
                     value={form[label.value] ?? ""}
                     onChange={(e) => onChange(label.value, e.target.value)}
                 />
@@ -61,5 +60,12 @@ const StyledButton = styled.button`
     &:hover {
         background-color: ${theme.colors.accent}
     }
+`
+
+const StyledInput = styled.input`
+    background-color: ${theme.colors.background};
+    width: 100%;
+    box-sizing : border-box;
+    border: 1px solid ${theme.colors.border};
 `
 export default TableRowInput

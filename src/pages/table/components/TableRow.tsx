@@ -5,12 +5,12 @@ import styled from "@emotion/styled";
 
 interface StyledTableRowProps {
     keyboard :KeyboardRow
+    onClick: ()=> void
 }
 
-const TableRow = ({keyboard} : StyledTableRowProps) => {
+const TableRow = ({keyboard, onClick} : StyledTableRowProps) => {
     return (
-        <StyledTableRow>
-                <StyledCell>{keyboard.name}</StyledCell>
+        <StyledTableRow onClick={onClick}>
                 <StyledCell>{keyboard.name}</StyledCell>
                 <StyledCell>{keyboard.layout}</StyledCell>
                 <StyledCell>{keyboard.matrix_cols}</StyledCell>

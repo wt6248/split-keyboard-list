@@ -3,6 +3,8 @@ import { Layout } from './layout/Layout'
 import { CatalogPage } from './pages/catalog/CatalogPage'
 import { AboutPage } from './pages/AboutPage';
 import TablePage from './pages/table/TablePage';
+import ProtectedRoute from './pages/ProtectedRoute';
+import LoginPage from './pages/LoginPage';
 
 const Router = createBrowserRouter([
   {
@@ -18,8 +20,15 @@ const Router = createBrowserRouter([
         element: <AboutPage />
       },
       {
+        path: 'login',
+        element: <LoginPage />
+      },
+      {
         path: 'table',
-        element: <TablePage />
+        element: 
+        <ProtectedRoute>
+      <TablePage />
+    </ProtectedRoute>
       }
     ]
   }
