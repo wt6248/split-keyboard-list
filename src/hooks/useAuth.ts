@@ -1,7 +1,6 @@
 import { supabase } from "@/api/supabase"
 import { type User } from "@supabase/supabase-js"
-import { useEffect, useState } from "react"
-import { data } from "react-router-dom"
+import { useCallback, useEffect, useState } from "react"
 
 const useAuth = () => {
     const [user, setUser] = useState<User | null>(null)
@@ -23,7 +22,15 @@ const useAuth = () => {
     return () => subscription.unsubscribe()
   }, [])
 
-  return { user, loading }
+  const signOut = useCallback(async () => {
+    const { error } = await supabase.auth.signOut()
+    if (!error) {
+        setUser(null)
+    }
+    return { error }
+}, [])
+
+  return { user, loading, signOut }
 
 }
 

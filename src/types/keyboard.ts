@@ -1,27 +1,41 @@
-// layout/connectivity는 아직 enum 픽스 전이라 string + unknown 허용
-export type KeyboardLayout =
-  | 'row-stagger'
-  | 'ortholinear'
-  | 'column-stagger'
-  | 'alice'
-  | 'dactyl'
-  | 'spray'
-  | 'other'
-  | 'unknown';
-export type KeyboardConnectivity =
-  | 'wired'
-  | 'wireless'
-  | 'both'
-  | 'unknown';
+export const KEYBOARD_LAYOUTS = [
+    'row-stagger',
+    'ortholinear',
+    'column-stagger',
+    'alice',
+    'dactyl',
+    'spray',
+    'other',
+] as const
 
-export type PointingDevice =
-  | 'none'
-  | 'trackball'
-  | 'trackpad'
-  | 'trackpoint'
-  | 'unknown';
+export type KeyboardLayout = (typeof KEYBOARD_LAYOUTS)[number]
 
-export type EncoderSupport = 'none' | 'supported' | 'unknown';
+export const KEYBOARD_CONNECTIVITIES = [
+    'wired',
+    'wireless',
+    'both',
+    'unknown',
+] as const
+
+export type KeyboardConnectivity = (typeof KEYBOARD_CONNECTIVITIES)[number]
+
+export const POINTING_DEVICES = [
+    'none',
+    'trackball',
+    'trackpad',
+    'trackpoint',
+    'unknown',
+] as const
+
+export type PointingDevice = (typeof POINTING_DEVICES)[number]
+
+export const ENCODER_SUPPORTS = [
+    'none',
+    'supported',
+    'unknown',
+] as const
+
+export type EncoderSupport = (typeof ENCODER_SUPPORTS)[number]
 
 export type RawKeyboardEntity = {
   id: string;

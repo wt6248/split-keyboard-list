@@ -11,11 +11,14 @@ interface StyledTableRowProps {
 const TableRow = ({keyboard, onClick} : StyledTableRowProps) => {
     return (
         <StyledTableRow onClick={onClick}>
-                <StyledCell>{keyboard.name}</StyledCell>
+                <StyledCellName>{keyboard.name}</StyledCellName>
                 <StyledCell>{keyboard.layout}</StyledCell>
                 <StyledCell>{keyboard.matrix_cols}</StyledCell>
                 <StyledCell>{keyboard.matrix_rows}</StyledCell>
                 <StyledCell>{keyboard.description}</StyledCell>
+                <StyledCell>{keyboard.pointing_device}</StyledCell>
+                <StyledCell>{keyboard.encoder}</StyledCell>
+                <StyledCell>{keyboard.connectivity}</StyledCell>
         </StyledTableRow>
     )
 }
@@ -30,7 +33,13 @@ const StyledTableRow = styled.tr`
   }
 `
 const StyledCell = styled.td`
-    ${theme.style.headingSm};
+    ${theme.style.bodySm};
+    padding: 10px 20px;
+    color: ${theme.colors.text.sub};
+`
+
+const StyledCellName = styled.td`
+    ${theme.style.bodySm};
     padding: 10px 20px;
     color: ${theme.colors.text.main};
 `

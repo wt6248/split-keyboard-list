@@ -1,83 +1,24 @@
-import type { KeyboardRow } from "@/types/keyboard";
+import { ENCODER_SUPPORTS, KEYBOARD_CONNECTIVITIES, KEYBOARD_LAYOUTS, POINTING_DEVICES, type KeyboardRow } from "@/types/keyboard";
 import { createColumnHelper } from "@tanstack/react-table";
 
 const columnHelper = createColumnHelper<KeyboardRow>();
 
 export const columnOption = [
     // { label: "Image", value: "image_url" },
-    { label: "NAME", value: "name" },
-    { label: "LAYOUT", value: "layout" },
-    { label: "COLS", value: "matrix_cols" },
-    { label: "ROWS", value: "matrix_rows" },
-    { label: "DESCRIPTION", value: "description" },
+    { label: "NAME", value: "name", inputType: "text" },
+    { label: "LAYOUT", value: "layout", inputType: "select", options: KEYBOARD_LAYOUTS }, // 실제 enum 값으로 교체},
+    { label: "COLS", value: "matrix_cols", inputType: "number" },
+    { label: "ROWS", value: "matrix_rows", inputType: "number" },
+    { label: "DESCRIPTION", value: "description", inputType: "text" },
+    { label: "POINTER", value: "pointing_device", inputType: "select", options: POINTING_DEVICES },
+    { label: "ENCODER", value: "encoder", inputType: "select", options: ENCODER_SUPPORTS },
+    { label: "CONNECTIVITY", value: "connectivity", inputType: "select", options: KEYBOARD_CONNECTIVITIES },
+    
 ] as const 
 
 export const keyboardColumns = columnOption.map((item) => {
     return columnHelper.accessor(item.value, {
-        header: item.value,
+        header: item.label,
         cell: (info) => info.getValue(),
     })
 })
-// export const keyboardColumns = [
-//     columnHelper.accessor("image_url", {
-//         header: "Image",
-//         cell: (info) =>
-//             info.getValue() ?? "No Image",
-//     }),
-//     columnHelper.accessor("name", {
-//         header: "Name",
-//         cell: (info) => info.getValue(),
-//     }),
-//     columnHelper.accessor("id", {
-//         header: "ID",
-//         cell: (info) => info.getValue(),
-//     }),
-//     columnHelper.accessor("release_ym", {
-//         header: "Release YM",
-//         cell: (info) => info.getValue(),
-//     }),
-//     columnHelper.accessor("designer", {
-//         header: "Designer",
-//         cell: (info) => info.getValue(),
-//     }),
-//     columnHelper.accessor("description", {
-//         header: "Description",
-//         cell: (info) => info.getValue(),
-//     }),
-//     columnHelper.accessor("github_url", {
-//         header: "Github",
-//         cell: (info) => info.getValue(),
-//     }),
-//     columnHelper.accessor("website_url", {
-//         header: "Website",
-//         cell: (info) => info.getValue(),
-//     }),
-//     columnHelper.accessor("github_stars", {
-//         header: "Stars",
-//         cell: (info) => info.getValue(),
-//     }),
-//     columnHelper.accessor("layout", {
-//         header: "Layout",
-//         cell: (info) => info.getValue(),
-//     }),
-//     columnHelper.accessor("pointing_device", {
-//         header: "Pointing Devices",
-//         cell: (info) => info.getValue(),
-//     }),
-//     columnHelper.accessor("encoder", {
-//         header: "Encoder",
-//         cell: (info) => info.getValue(),
-//     }),
-//     columnHelper.accessor("connectivity", {
-//         header: "Connectivity",
-//         cell: (info) => info.getValue(),
-//     }),
-//     columnHelper.accessor("matrix_cols", {
-//         header: "cols",
-//         cell: (info) => info.getValue(),
-//     }),
-//     columnHelper.accessor("matrix_rows", {
-//         header: "rows",
-//         cell: (info) => info.getValue(),
-//     }),
-// ]

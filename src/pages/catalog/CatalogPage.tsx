@@ -10,7 +10,7 @@ import { type KeyboardRow } from "@/types/keyboard";
 import { PageButton } from "@/components/PageButton";
 
 export const CatalogPage = () => {
-  const { activeFilters, setFilter } = useFilterParams();
+  const { activeFilters } = useFilterParams();
   const { data } = useKeyboards({ filters: activeFilters });
   const [selectedKeyboard, setSelectedKeyboard] = useState<KeyboardRow | null>(null)
   
@@ -40,18 +40,6 @@ export const CatalogPage = () => {
         </GridContainer>
         {/* pagenation */}
         <PageButton totalPage={data?.totalPages ?? 0}/>
-        {/* <div className="flex justify-center gap-2 mt-8">
-          {Array.from({ length: data?.totalPages ?? 0 }, (_, i) => i + 1).map(
-            (pageNumber) => (
-              <Temp
-                $active={pageNumber === (Number(activeFilters.page?.[0]) || 1)}
-                onClick={() => setFilter("page", String(pageNumber))}
-              >
-                {pageNumber}
-              </Temp>
-            ),
-          )}
-        </div> */}
       </HomepageContainer>
     </>
   );
@@ -74,12 +62,3 @@ const GridContainer = styled.div`
   gap: 1.25rem;
   width: fit-content;
   `
-
-// const Temp = styled.div<{ $active: boolean }>`
-//   padding: 0.25rem 0.75rem;
-//   border-radius: 0.25rem;
-//   border: 1px solid ${theme.colors.border};
-//   background-color: ${({ $active }) => ($active ? theme.colors.accent : theme.colors.card)};
-//   color: ${theme.colors.text.main};
-//   cursor: pointer;
-// `;

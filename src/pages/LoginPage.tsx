@@ -2,8 +2,10 @@ import { supabase } from "@/api/supabase"
 import { useState } from "react"
 import styled from "@emotion/styled";
 import { theme } from "@/tokens/theme";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
+    const navigate = useNavigate()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState("")
@@ -18,6 +20,7 @@ function LoginPage() {
         if (error) {
             setError(error.message)
         }
+        navigate('/table')
     }
 
     return (
@@ -30,7 +33,7 @@ function LoginPage() {
                 비밀번호 
                 <StyledInput type="password" value={password} onChange={(e) => setPassword(e.target.value)} /> 
             </div>
-            <button onClick={handleLogin}>로그인</button>
+            <StyledButton onClick={handleLogin}>로그인</StyledButton>
             {error && <p>{error}</p>}
         </StyledDiv>
     )
@@ -50,4 +53,13 @@ const StyledInput = styled.input`
     /* width: 100%; */
     box-sizing : border-box;
     border: 1px solid ${theme.colors.border};
+`
+
+const StyledButton = styled.button`
+    background-color: ${theme.colors.card};
+    border: 1px, solid, ${theme.colors.border};
+    cursor: pointer;
+    &:hover {
+        background-color: ${theme.colors.accent};
+    }
 `
